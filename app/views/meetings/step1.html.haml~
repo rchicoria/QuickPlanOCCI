@@ -1,0 +1,6 @@
+#div
+%p
+  ="QuickPlan is the easiest way to plan and manage your meetings. Ready to use, completely free and no signup required!"
+%p{:class=> "big-button"}
+  %a{:href=> "", :class=>"round"}
+    Create new meeting

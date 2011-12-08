@@ -1,0 +1,43 @@
+= form_for @meeting, :url => {:action => 'create', :controller => 'meetings', :step => '2'} do |f|
+  - if @meeting.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@meeting.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @meeting.errors.full_messages.each do |msg|
+        %li= msg
+
+  = f.fields_for :creator  do |c|
+    .field
+      %p
+        = c.label :name, "Your name"
+        %br
+        = c.text_field :name
+
+    .field
+      %p
+        = c.label :email, "Your email"
+        %br
+        = c.text_field :email
+
+  .field
+    %p
+      = f.label :subject, "Meeting subject"
+      %br
+      = f.text_field :subject, :value => @meeting.subject
+
+  .field
+    %p
+      = f.label :date
+      %br
+      = f.datepicker :date, {:dateFormat => 'dd-mm-yy'}
+  .field
+    %p
+      = f.label :topics, "Meeting topics"
+    = f.fields_for :topics do |f|
+      = render "topic_fields", :f => f
+      
+    %p    
+      = link_to_add_fields "add", f, :topics
+
+    %p{:class => 'big-button'}
+      = f.submit :class => 'round'

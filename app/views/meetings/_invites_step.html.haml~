@@ -1,0 +1,14 @@
+- app_title "New Meeting"
+
+#step
+  %h3="Invite participants"
+  
+  %p
+    An email was sent to you with the meeting management and meeting invitation links. You can now share the invitation link with the meeting participants. If you want, you can use the following tool to easily invite them (otherwise you can skip to the meeting management area):
+  
+  .form
+    = form_for @meeting, :as => :meeting, :url => {:controller => :meetings, :action => :edit}, :remote => true  do |f|
+      = render "form_invites", :f => f
+      %p{:class => 'big-button'}
+        = submit_tag 'Go back', :class => 'round'     
+        = submit_tag 'Invite', :class => 'round'

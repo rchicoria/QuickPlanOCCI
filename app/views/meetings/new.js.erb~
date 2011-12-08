@@ -1,0 +1,1 @@
+$('#step').html("<%=escape_javascript(render "#{@step ? @step : 'first'}_step")%>");

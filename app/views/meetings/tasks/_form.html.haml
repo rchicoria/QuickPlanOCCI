@@ -1,0 +1,27 @@
+= form_for(@meeting_task) do |f|
+  - if @meeting_task.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@meeting_task.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @meeting_task.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :id
+    %br
+    = f.number_field :id
+  .field
+    = f.label :description
+    %br
+    = f.text_field :description
+  .field
+    = f.label :topic_id
+    %br
+    = f.number_field :topic_id
+  .field
+    = f.label :person_id
+    %br
+    = f.number_field :person_id
+
+  .actions
+    = f.submit

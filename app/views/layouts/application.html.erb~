@@ -1,0 +1,16 @@
+!!! Strict
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+  %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %title
+      = "RPR: " + (yield :page_title or t 'app.title.main')
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

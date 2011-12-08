@@ -1,0 +1,24 @@
+- if @meeting.errors.any?
+  #errorExplanation
+    %h2= "#{pluralize(@meeting.errors.count, 'error')} prohibited this user from being saved:"
+    %ul
+    - @meeting.errors.full_messages.each do |msg|
+      %li= msg
+
+.field
+  %p
+    = f.label :mail_list, "Participants emails (separated by commas)"
+    %br
+    = f.text_area :mail_list
+
+.field
+  %p
+    = f.label :invitation_text, "Invitation to the meeting"
+    %br
+    = f.text_area :invitation_text, :value => default_invitation_text
+
+.field
+  %p
+    = f.check_box :send_to_me
+    = f.label :send_to_me, "Send me a copy of the invitation"
+  %br

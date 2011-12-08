@@ -1,0 +1,39 @@
+= form_for(@meeting_person) do |f|
+  - if @meeting_person.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@meeting_person.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @meeting_person.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :id
+    %br
+    = f.number_field :id
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :email
+    %br
+    = f.text_field :email
+  .field
+    = f.label :rsvp
+    %br
+    = f.text_field :rsvp
+  .field
+    = f.label :presence
+    %br
+    = f.text_field :presence
+  .field
+    = f.label :meeting_id
+    %br
+    = f.number_field :meeting_id
+  .field
+    = f.label :deleted_at
+    %br
+    = f.datetime_select :deleted_at
+
+  .actions
+    = f.submit

@@ -1,0 +1,14 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), meeting_tasks_path
+  = link_to t('edit'), edit_meeting_task_path(@meeting_task)
+
+%dl
+  %dt= MeetingTask.human_attribute_name :id
+  %dd= @meeting_task.id
+  %dt= MeetingTask.human_attribute_name :description
+  %dd= @meeting_task.description
+  %dt= MeetingTask.human_attribute_name :topic_id
+  %dd= @meeting_task.topic_id
+  %dt= MeetingTask.human_attribute_name :person_id
+  %dd= @meeting_task.person_id

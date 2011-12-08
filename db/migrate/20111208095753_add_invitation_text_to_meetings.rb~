@@ -1,0 +1,5 @@
+class AddInvitationTextToMeetings < ActiveRecord::Migration
+  def change
+    add_column :meetings, :inivitation_text, :text
+  end
+end

@@ -1,0 +1,1 @@
+page.replace_html('step', render("step2"))

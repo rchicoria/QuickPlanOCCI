@@ -1,0 +1,16 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), meetings_path
+  = link_to t('edit'), edit_meeting_path(@meeting)
+
+%dl
+  %dt= Meeting.human_attribute_name :id
+  %dd= @meeting.id
+  %dt= Meeting.human_attribute_name :creator_id
+  %dd= @meeting.creator_id
+  %dt= Meeting.human_attribute_name :date
+  %dd= @meeting.date
+  %dt= Meeting.human_attribute_name :state
+  %dd= @meeting.state
+  %dt= Meeting.human_attribute_name :deleted_at
+  %dd= @meeting.deleted_at

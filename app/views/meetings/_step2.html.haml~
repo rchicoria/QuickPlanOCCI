@@ -1,0 +1,7 @@
+- app_title "New Meeting"
+
+#div
+  %p
+    ="Passo 2"
+  %p{:class=> "big-button"}
+    = link_to "Create new meeting", new_meeting_path, :class => "round"

@@ -1,0 +1,14 @@
+class CreateMeetings < ActiveRecord::Migration
+  def change
+    create_table :meetings do |t|
+      t.integer :id
+      t.string :subject
+      t.integer :creator_id
+      t.datetime :date
+      t.string :state
+      t.datetime :deleted_at
+
+      t.timestamps
+    end
+  end
+end

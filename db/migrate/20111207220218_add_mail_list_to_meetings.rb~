@@ -1,0 +1,5 @@
+class AddMailListToMeetings < ActiveRecord::Migration
+  def change
+    add_column :meetings, :mail_list, :text
+  end
+end

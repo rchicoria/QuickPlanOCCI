@@ -1,0 +1,2 @@
+module MeetingTopicsHelper
+end

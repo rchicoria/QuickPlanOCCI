@@ -1,0 +1,22 @@
+%h1= t('.title')
+%p= link_to t('.new_meeting_task'), new_meeting_task_path
+
+%table
+  %thead
+    %tr
+      %th= MeetingTask.human_attribute_name :id
+      %th= MeetingTask.human_attribute_name :description
+      %th= MeetingTask.human_attribute_name :topic_id
+      %th= MeetingTask.human_attribute_name :person_id
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for meeting_task in @meeting_tasks
+      %tr{ :class => cycle(:odd, :even) }
+        %td= meeting_task.id
+        %td= meeting_task.description
+        %td= meeting_task.topic_id
+        %td= meeting_task.person_id
+        %td.action= link_to t('show'), meeting_task
+        %td.action= link_to t('edit'), edit_meeting_task_path(meeting_task)
+        %td.action= link_to t('destroy'), meeting_task, :confirm => t('are_you_sure'), :method => :delete

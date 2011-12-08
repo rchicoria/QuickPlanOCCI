@@ -1,0 +1,8 @@
+- app_title "New Meeting"
+
+#step
+  %h3= Sent
+  %p
+    ="An invitation has been sent to all the indicated contacts. You may now enter the meeting management area:"
+  %p{:class=> "big-button"}
+    = link_to "Meeting Management", edit_meeting_path(:id => @meeting.id, :step => "details"), :remote => true, :class => "round"
