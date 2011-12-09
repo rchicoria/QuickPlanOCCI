@@ -46,9 +46,9 @@ class MeetingsController < ApplicationController
   def edit
     @meeting = Meeting.find_by_management_url!(params[:id])
     
-    details = "Topics for this meeting:\n"
+    details = "Topics for this meeting:%0A"
     @meeting.topics.each do |topic|
-      details += " - #{topic.name}\n"
+      details += " - #{topic.name}%0A"
     end
     @gcal = {:text => @meeting.subject,
              :dates => "#{@meeting.date.strftime("%Y%m%d")}/#{@meeting.date.strftime("%Y%m%d")}",
@@ -82,6 +82,8 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(params[:meeting])
+    @creator = Person.new(params[:meeting][:creator_attributes])
+    @meeting.creator_id = @creator.id
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
@@ -113,7 +115,9 @@ class MeetingsController < ApplicationController
     elsif(params[:commit] == "Meeting Management")
       @step = 'management'
     elsif(params[:commit] == "Start Meeting")
+      @meeting.state = 'C'
       @step = 'meeting'
+      @meeting.save
     elsif(params[:commit] == "Generate Documentation")
       @step = 'meeting'
     elsif(params[:commit] == "Invite")

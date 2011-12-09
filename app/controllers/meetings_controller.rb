@@ -82,6 +82,9 @@ class MeetingsController < ApplicationController
   # POST /meetings.json
   def create
     @meeting = Meeting.new(params[:meeting])
+    @creator = Person.new(params[:meeting][:creator_attributes])
+    @creator.save
+    @meeting.creator_id = @creator.id
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save

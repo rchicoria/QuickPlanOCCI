@@ -3,7 +3,7 @@
     = f.label :description, "Task"
     = f.text_field :description
     - temp = []
-    - temp << @meeting.participants
-    - temp << @meeting.creator
+    - temp |= @meeting.participants
+    - temp << Person.find(@meeting.creator.id)
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}
     = link_to_remove_fields "remove", f
