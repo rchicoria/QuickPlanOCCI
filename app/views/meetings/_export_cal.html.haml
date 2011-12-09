@@ -1,0 +1,4 @@
+%p.green-button
+  Export meeting to:
+  %br
+  %a{:href => "http://www.google.com/calendar/event?action=TEMPLATE&text=#{@gcal[:text]}&dates=#{@gcal[:dates]}&details=#{@gcal[:details]}", :target => "_blank", :class => "round"} Google Calendar

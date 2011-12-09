@@ -45,6 +45,15 @@ class MeetingsController < ApplicationController
   # GET /meetings/1/edit
   def edit
     @meeting = Meeting.find_by_management_url!(params[:id])
+    
+    details = "Topics for this meeting:%0A"
+    @meeting.topics.each do |topic|
+      details += " - #{topic.name}%0A"
+    end
+    @gcal = {:text => @meeting.subject,
+             :dates => "#{@meeting.date.strftime("%Y%m%d")}/#{@meeting.date.strftime("%Y%m%d")}",
+             :details => details
+    }
 
     @meeting.topics.each do |topic|
       topic.tasks.build

@@ -2,7 +2,6 @@ class PeopleController < ApplicationController
   def edit
     @person = Person.find_by_invitation_url!(params[:id])
     @person.rsvp = params[:option]
-    @person.save
     @step = params[:step] ? params[:step] : 'form' 
 
     respond_to do |format|
@@ -14,7 +13,6 @@ class PeopleController < ApplicationController
 
   def update
     @person = Person.find_by_invitation_url(params[:id])
-
     @step = "confirmation"
 
     respond_to do |format|

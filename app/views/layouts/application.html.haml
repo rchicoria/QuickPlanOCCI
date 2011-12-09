@@ -8,7 +8,9 @@
     = csrf_meta_tags
   %body
     #container{:class => "round"}
+      = yield :export_cal
       #header{:class => "round shadow"}
-        %h1= "QuickPlan"
+        %h1
+          %a{:href => root_path} QuickPlan
       #content{:class => "round shadow"}      
         = yield
