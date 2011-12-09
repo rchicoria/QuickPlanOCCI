@@ -5,18 +5,18 @@
     - @meeting.errors.full_messages.each do |msg|
       %li= msg
 
-  = f.fields_for :creator  do |c|
-    .field
-      %p
-        = c.label :name, "Your name"
-        %br
-        = c.text_field :name
+= f.fields_for :creator  do |c|
+  .field
+    %p
+      = c.label :name, "Your name"
+      %br
+      = c.text_field :name
 
-    .field
-      %p
-        = c.label :email, "Your email"
-        %br
-        = c.text_field :email
+  .field
+    %p
+      = c.label :email, "Your email"
+      %br
+      = c.text_field :email
 
 .field
   %p
@@ -32,7 +32,7 @@
 .field
   %p
     = f.label :topics, "Meeting topics"
-    = f.fields_for :topics do |f|
-      = render "topic_fields", :f => f 
+    = f.fields_for :topics do |t|
+      = render "topic_fields", :f => t 
   %p    
-    = link_to_add_fields "add", f, :topics
+    = link_to_add_fields "add", t, :topics

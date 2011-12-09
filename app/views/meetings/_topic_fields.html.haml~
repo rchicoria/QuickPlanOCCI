@@ -1,4 +1,7 @@
 .field
   %p{:class => 'fields'}
     = f.text_field :name
-    = link_to_remove_fields "remove", t
+    = link_to_remove_fields "remove", f
+    = f.fields_for :tasks do |t|
+      = render "task_fields", :f => t 
+    = link_to_add_fields "add", f, :tasks

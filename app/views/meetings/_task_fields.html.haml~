@@ -1,0 +1,9 @@
+.field
+  %p{:class => 'fields'}
+    = f.label :description, "Task"
+    = f.text_field :description
+    - temp = []
+    - temp << @meeting.participants
+    - temp << @meeting.creator
+    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}
+    = link_to_remove_fields "remove", f

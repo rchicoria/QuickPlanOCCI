@@ -30,7 +30,8 @@ class MeetingsController < ApplicationController
     @step = params[:step] ? params[:step] : 'first'
   
     @meeting.build_creator
-    @meeting.topics.build
+    topic = @meeting.topics.build
+    #topic.tasks.build
     
     puts "new new "
     
@@ -45,10 +46,14 @@ class MeetingsController < ApplicationController
   def edit
     @meeting = Meeting.find_by_management_url!(params[:id])
 
-    if(@meeting.state == 'A')    
-      @step = params[:step] ? params[:step] : 'details_edit'
+    @meeting.topics.each do |topic|
+      topic.tasks.build
+    end
+
+    if(@meeting.state == 'B')    
+      @step = params[:step] ? params[:step] : 'invites'
     else
-      @step = params[:step] ? params[:step] : 'management'
+      @step = params[:step] ? params[:step] : 'meeting'
     end
 
     puts @step
@@ -99,6 +104,10 @@ class MeetingsController < ApplicationController
     elsif(params[:commit] == "Meeting Management")
       @step = 'management'
     elsif(params[:commit] == "Start Meeting")
+      @meeting.state = 'C'
+      @step = 'meeting'
+      @meeting.save
+    elsif(params[:commit] == "Generate Documentation")
       @step = 'meeting'
     elsif(params[:commit] == "Invite")
       @meeting.state = 'B'

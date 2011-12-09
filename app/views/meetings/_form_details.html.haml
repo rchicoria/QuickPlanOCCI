@@ -32,7 +32,7 @@
 .field
   %p
     = f.label :topics, "Meeting topics"
-    = f.fields_for :topics do |f|
-      = render "topic_fields", :f => f 
+    = f.fields_for :topics do |t|
+      = render "topic_fields", :f => t 
   %p    
     = link_to_add_fields "add", f, :topics

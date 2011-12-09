@@ -10,15 +10,14 @@
 %table
   - count = 0
   = f.fields_for :topics  do |p|  
-    -puts "ddddddddddddd"+count.to_s   
+    - puts "ddddddddddddd"+count.to_s   
     .field
       %p{:class => 'fields'}
         = p.label :name, @meeting.topics.all[count].name
         %br
-        = p.text_area :description
-    - count += 1
-//    = p.fields_for :tasks do |t|
-//      %p{:class => 'fields'}
-//        = t.label :name, "Task"
-//        = t.text_field :description
-//        = t.text_field :assignee
+        = p.text_area :description, :class => 'topic'
+      - count += 1
+      = p.fields_for :tasks do |t|
+        = render "task_fields", :f => t
+      %p    
+        = link_to_add_fields "add", p, :tasks
