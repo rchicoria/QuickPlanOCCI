@@ -115,6 +115,7 @@ p.big-button input {
 }
 
 p.big-button input:hover {
+  cursor: pointer;
   font-size: 120%;
   border: 0;
   margin: 0;

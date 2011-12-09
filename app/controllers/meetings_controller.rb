@@ -46,14 +46,7 @@ class MeetingsController < ApplicationController
   def edit
     @meeting = Meeting.find_by_management_url!(params[:id])
     
-    details = "Topics for this meeting:%0A"
-    @meeting.topics.each do |topic|
-      details += " - #{topic.name}%0A"
-    end
-    @gcal = {:text => @meeting.subject,
-             :dates => "#{@meeting.date.strftime("%Y%m%d")}/#{@meeting.date.strftime("%Y%m%d")}",
-             :details => details
-    }
+    @gcal = export_cal(@meeting)
 
     @meeting.topics.each do |topic|
       topic.tasks.build
@@ -85,6 +78,7 @@ class MeetingsController < ApplicationController
     @creator = Person.new(params[:meeting][:creator_attributes])
     @creator.save
     @meeting.creator_id = @creator.id
+    @meeting.date = (DateTime.strptime(params[:meeting][:date], '%m/%d/%Y %H:%M ')).to_datetime
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save

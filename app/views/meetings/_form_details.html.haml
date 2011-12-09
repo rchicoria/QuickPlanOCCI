@@ -28,7 +28,9 @@
   %p
     = f.label :date
     %br
-    = f.datepicker :date, {:dateFormat => 'dd-mm-yy'}
+    = f.text_field :date
+    %script
+      $('#meeting_date').datetimepicker();
 .field
   %p
     = f.label :topics, "Meeting topics"

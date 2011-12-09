@@ -50,7 +50,6 @@ GEM
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
-    jquery_datepicker (0.3.2)
     json (1.6.3)
     mail (2.3.0)
       i18n (>= 0.4.0)
@@ -126,7 +125,6 @@ DEPENDENCIES
   formtastic
   haml
   jquery-rails
-  jquery_datepicker
   odf-report
   pg
   rails (= 3.1.3)

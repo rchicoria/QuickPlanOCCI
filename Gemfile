@@ -20,7 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'jquery_datepicker'
+#gem 'jquery_datepicker'
 
 gem 'pg'
 
