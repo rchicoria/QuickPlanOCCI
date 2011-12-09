@@ -1,0 +1,25 @@
+#tabsdiv{:class=>"topround"}
+  %ul{:id=>"tabs"}
+    %li{:id=>"tab1", :class=>"topround", :onclick=> "showAttendances();"}
+      ="Attendances"
+    %li{:id=>"tab2", :class=>"topround", :onclick=> "showRecord();"}
+      ="Record"
+
+.form
+  = form_for @meeting, :url => {:controller => :meetings, :action => :update}, :html => {:class => 'participants'}  do |f|
+
+    #attendances
+      = render "form_attendances", :f => f
+
+    #record
+      = render "form_record", :f => f
+
+    %p{:class => 'big-button'}
+      = submit_tag 'Start Meeting', :class => 'round'
+
+:javascript
+
+$(document).ready(function() {
+  showAttendances();
+});
+

@@ -1,1 +1,2 @@
-= render :partial => "#{@step ? @step : 'new'}_step"
+- puts "aquiiiiiiiiiiii"
+= render :partial => "#{@step}_step"

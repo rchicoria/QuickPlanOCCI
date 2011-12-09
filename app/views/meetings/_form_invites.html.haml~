@@ -10,19 +10,6 @@
     = f.label :mail_list, "Participants emails (separated by commas)"
     %br
     = f.text_area :mail_list
+    %p{:class => 'small-button'}    
+      = submit_tag 'Invite', :class => 'round'
 
-.field
-  %p
-    = f.label :invitation_text, "Invitation to the meeting"
-    %br
-    = f.text_area :invitation_text, :value => default_invitation_text
-
-.field
-  %p
-    = f.check_box :send_to_me
-    = f.label :send_to_me, "Send me a copy of the invitation"
-  %br
-
-  %p{:class => 'big-button'}
-    = submit_tag 'Go back', :class => 'round'     
-    = submit_tag 'Invite', :class => 'round'

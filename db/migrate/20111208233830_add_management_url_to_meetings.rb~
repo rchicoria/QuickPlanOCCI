@@ -1,0 +1,5 @@
+class AddManagementUrlToMeetings < ActiveRecord::Migration
+  def change
+    :meetings, :management_url, :string
+  end
+end

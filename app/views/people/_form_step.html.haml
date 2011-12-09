@@ -1,0 +1,9 @@
+- app_title "Confirmation sent"
+
+#step
+  %h3="Thank you for your confirmation!"
+  .form
+    = form_for @person, :url => {:controller => :people, :action => :update} ,:remote => true  do |f|
+      = render "form", :f => f
+      %p{:class => 'big-button'}
+        = submit_tag 'Confirm', :class => 'round'

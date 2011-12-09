@@ -19,3 +19,24 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).parent().before(content.replace(regexp, new_id));
 }
+
+function showAttendances()
+{
+  document.getElementById('attendances').style.display = 'block';
+  document.getElementById("tab1").className = 'selected topround';
+  document.getElementById('record').style.display = 'none';
+  document.getElementById("tab2").className = 'topround';
+  document.getElementById('tasks').style.display = 'none';
+  document.getElementById("tab3").className = 'topround';
+}
+
+function showRecord()
+{
+  document.getElementById('attendances').style.display = 'none';
+  document.getElementById("tab1").className = 'topround';
+  document.getElementById('record').style.display = 'block';
+  document.getElementById("tab2").className = 'selected topround';
+  document.getElementById('tasks').style.display = 'none';
+  document.getElementById("tab3").className = 'topround';
+}
+

@@ -1,0 +1,5 @@
+class AddHashToMeetings < ActiveRecord::Migration
+  def change
+    add_column :meetings, 
+  end
+end

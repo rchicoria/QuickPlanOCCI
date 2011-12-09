@@ -1,0 +1,25 @@
+- if @meeting.errors.any?
+  #errorExplanation
+    %h2= "#{pluralize(@meeting.errors.count, 'error')} prohibited this user from being saved:"
+    %ul
+    - @meeting.errors.full_messages.each do |msg|
+      %li= msg
+
+- count = 0
+
+%table
+  = f.fields_for :participants  do |p|   
+    %tr    
+      %td
+        = p.text_field :name, :value => (@meeting.participants.all[count].name ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value' 
+      %td{:class => 'emailcol'}   
+        = p.label :name, @meeting.participants.all[count].email
+      %td{:class => 'rsvpcol'}
+        - if @meeting.participants.all[count].rsvp == 'yes'
+          - rsvp = "Attending"
+        - elsif @meeting.participants.all[count].rsvp == 'no'
+          - rsvp = "Not attending"
+        - else
+          - rsvp = "Awaiting reply"
+        = p.label :rsvp, rsvp
+    - count+=1

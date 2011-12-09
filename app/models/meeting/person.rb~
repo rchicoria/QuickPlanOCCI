@@ -1,3 +1,5 @@
-class MeetingPerson < ActiveRecord::Base
+class Meeting::Person < ActiveRecord::Base
   belongs_to :meeting
+
+  table_name :meeting_people
 end

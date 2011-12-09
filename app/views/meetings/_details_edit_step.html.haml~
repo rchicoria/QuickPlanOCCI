@@ -3,7 +3,7 @@
 #step
   %h3="Create new meeting"
   .form
-    = form_for @meeting, :url => {:controller => :meetings, :method => :put} ,:remote => true  do |f|
+    = form_for @meeting, :url => {:controller => :meetings, :action => :update} ,:remote => true  do |f|
       = render "form_details", :f => f
       %p{:class => 'big-button'}
         = submit_tag 'Continue', :class => 'round'

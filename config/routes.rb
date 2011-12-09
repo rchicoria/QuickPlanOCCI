@@ -1,8 +1,11 @@
-QuickPlanOCCI::Application.routes.draw do
+QuickPlanOCCI::Application.routes.draw do  
   resources :meetings
-
+  resources :people
+  
   match 'meetings/new' => 'meetings#new', :via => [:get, :post]
   match 'meetings/:id/edit' => 'meetings#edit', :via => [:get, :put]
+  match 'manage/:id' => 'meetings#edit'
+  match 'rsvp/:id/:option' => 'people#edit'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

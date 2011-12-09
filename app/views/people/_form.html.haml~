@@ -1,0 +1,4 @@
+.field
+= f.label :name, "Please confirm your name:"
+%br
+= f.text_field :name

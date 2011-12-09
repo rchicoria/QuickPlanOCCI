@@ -1,13 +1,13 @@
 module MeetingsHelper
-
-  def default_invitation_text
-    h("Hi,
-
-I am using QuickPlan to notify you of a new meeting called 'Test Meeting', due to 1 January 2011.
-You can check its details and inform me about your availability using this link:
-http://quickplan.com/adj39dh5ks03nje
+  def default_invitation_text(meeting)
+    url = (Rails.env.development?) ? "http://localhost:3000/" : "http://localhost:3000/"
+    url = url + meeting.management_url      
+    return "Hi,
+ I am using QuickPlan to notify you of a new meeting called '#{meeting.subject}', due to #{meeting.date.to_s}.
 
 Regards,
-Ricardo Lopes")
+#{meeting.creator.name}"
   end
 end
+
+

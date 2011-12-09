@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p><%=@meeting.invitation_text%></p>
+    <p>Topics:
+    <% @meeting.topics.each do |topic| %>
+      <p><%= topic.name%></p>
+    <% end %>
+    <p>Confirmation</p>
+    <p><%=link_to "Yes", @url+"/yes"%></p>
+    <p><%=link_to "No", @url+"/no"%></p>  
+  </body>
+</html>

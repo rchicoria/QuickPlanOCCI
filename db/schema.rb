@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208155849) do
+ActiveRecord::Schema.define(:version => 20111209032543) do
 
   create_table "meeting_people", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20111208155849) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "invitation_url"
   end
 
   create_table "meeting_tasks", :force => true do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20111208155849) do
     t.datetime "updated_at"
     t.text     "mail_list"
     t.text     "invitation_text"
+    t.string   "management_url"
   end
 
 end

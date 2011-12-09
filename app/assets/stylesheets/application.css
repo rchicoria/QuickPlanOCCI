@@ -15,6 +15,11 @@ h1, h2, h3, h4, h5, h6 {
 	color: #AAA;
 }
 
+table {
+  text-align: center;
+  width: 100%;
+}
+
 #container {
 	width: 800px;
 	padding: 20px;
@@ -35,6 +40,11 @@ a:hover {
 .round {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+}
+
+.smallround {
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .topround {
@@ -82,11 +92,20 @@ a:hover {
 	margin: -20px;
 }
 
-td {
+td, td input, td label {
 	padding: 10px;
 	/*border: 1px solid #FF770E;
 	width: 33%;*/
-	vertical-align: top;
+	vertical-align: center;
+  font-size: 100%;
+}
+
+td.emailcol {
+  width: 200px;
+}
+
+td.rsvpcol {
+  width: 150px;
 }
 
 p.big-button {
@@ -108,6 +127,12 @@ p.big-button a, p.float-button a, p.big-button input {
 	color: #FFF;
 }
 
+p.small-button a, p.small-button input {
+	text-decoration: none;
+	background: #FF770E;
+	color: #FFF;
+}
+
 p.big-button input {
   font-size: 120%;
   border: 0;
@@ -117,6 +142,24 @@ p.big-button input {
 p.big-button input:hover {
   cursor: pointer;
   font-size: 120%;
+  border: 0;
+  margin: 0;
+}
+
+p.small-button {
+	margin: 3px 10px 15px 0;
+	text-align: right
+}
+
+p.small-button input {
+  font-size: 100%;
+  border: 0;
+  margin: 0;
+}
+
+p.small-button input:hover {
+  cursor: pointer;
+  font-size: 100%;
   border: 0;
   margin: 0;
 }
@@ -132,6 +175,11 @@ form {
 	margin: 25px auto 0 auto;
 	text-align: center;
 	width: 510px;
+}
+
+form.participants {
+	width: auto;
+  text-align: center;
 }
 
 form p {

@@ -4,7 +4,7 @@
   %h3="Create new meeting"
   
   .form
-    = form_for @meeting, :remote => true  do |f|
+    = form_for @meeting  do |f|
       = render "form_details", :f => f
       %p{:class => 'big-button'}
-        = submit_tag 'Create meeting', :class => 'round'
+        = submit_tag 'Create new meeting', :class => 'round'

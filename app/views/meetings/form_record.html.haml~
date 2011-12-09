@@ -1,0 +1,18 @@
+- if @meeting.errors.any?
+  #errorExplanation
+    %h2= "#{pluralize(@meeting.errors.count, 'error')} prohibited this user from being saved:"
+    %ul
+    - @meeting.errors.full_messages.each do |msg|
+      %li= msg
+
+- count = 0
+
+%table
+  - count = 0
+  = f.fields_for :topics  do |p|  
+    .field
+      %p{:class => 'fields'}
+        = f.label :name, @meeting.topics.all[count].name
+        = f.text_field :name
+        = link_to_remove_fields "remove", f
+    - count += 1

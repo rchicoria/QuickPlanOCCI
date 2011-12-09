@@ -4,6 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Thank you for using our service. Follow the URL to manage your meeting:</p>
+    <br>
+    <a href="#{url+@meeting.management_email}">url+@meeting.management_email</p>
   </body>
 </html>

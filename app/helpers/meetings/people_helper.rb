@@ -1,0 +1,2 @@
+module Meetings::PeopleHelper
+end
