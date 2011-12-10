@@ -7,3 +7,4 @@
       = render "form_management", :f => f
       %p{:class => 'big-button'}
         = submit_tag 'Start Meeting', :class => 'round'
+- content_for :export_cal, render(:partial => 'export_cal')

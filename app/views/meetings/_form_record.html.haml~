@@ -15,7 +15,7 @@
       %p{:class => 'fields'}
         = p.label :name, @meeting.topics.all[count].name
         %br
-        = p.text_area :description, :cols => 100
+        = p.text_area :description, :class => 'topic'
       - count += 1
       = p.fields_for :tasks do |t|
         = render "task_fields", :f => t

@@ -3,4 +3,7 @@ class Person < ActiveRecord::Base
   has_many :tasks
   
   set_table_name "meeting_people"
+
+  validates_presence_of :name  
+  validates_presence_of :email
 end

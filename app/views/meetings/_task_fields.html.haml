@@ -5,5 +5,5 @@
     - temp = []
     - temp |= @meeting.participants
     - temp << Person.find(@meeting.creator_id)
-    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}
+    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
     = link_to_remove_fields "remove", f

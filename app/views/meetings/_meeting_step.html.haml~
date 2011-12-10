@@ -1,3 +1,5 @@
+- app_title "Invite participants"
+
 #tabsdiv{:class=>"topround"}
   %ul{:id=>"tabs"}
     %li{:id=>"tab1", :class=>"topround", :onclick=> "showAttendances();"}
@@ -15,7 +17,8 @@
       = render "form_record", :f => f
 
     %p{:class => 'big-button'}
-      = submit_tag 'Generate documentation', :class => 'round'
+      = submit_tag 'Save', :class => 'round'
+      = submit_tag 'Generate Documentation', :class => 'round'
 
 :javascript
 

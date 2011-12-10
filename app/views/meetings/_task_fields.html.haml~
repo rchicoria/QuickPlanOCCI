@@ -4,6 +4,6 @@
     = f.text_field :description
     - temp = []
     - temp |= @meeting.participants
-    - temp << Person.find(@meeting.creator.id)
+    - temp << Person.find(@meeting.creator_id)
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}
     = link_to_remove_fields "remove", f

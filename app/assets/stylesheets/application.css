@@ -146,6 +146,10 @@ p.big-button input:hover {
   margin: 0;
 }
 
+p.big-button input.disabled {
+  background: #ff9d62;
+}
+
 p.small-button {
 	margin: 3px 10px 15px 0;
 	text-align: right
@@ -251,6 +255,27 @@ ul#tabs li:hover {
 ul#tabs li.selected {
 	background: white;
 	color: #AAA;
+}
+
+#errorExplanation {
+  width: 100%;
+  background: #ff8c8c;
+  text-align: left;
+  padding: 15px;
+  -moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#errorExplanation li {
+  display: block;
+}
+
+.field_with_errors{
+  text-align: left;
+}
+
+p.details label {
+  display: block;
 }
 
 /*bug do datepicker*/

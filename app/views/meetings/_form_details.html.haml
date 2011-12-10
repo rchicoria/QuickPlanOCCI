@@ -1,40 +1,34 @@
 - if @meeting.errors.any?
   #errorExplanation
-    %h2= "#{pluralize(@meeting.errors.count, 'error')} prohibited this user from being saved:"
-    %ul
     - @meeting.errors.full_messages.each do |msg|
       %li= msg
 
 = f.fields_for :creator  do |c|
   .field
-    %p
+    %p{:class => 'details'}
       = c.label :name, "Your name"
-      %br
       = c.text_field :name
 
   .field
-    %p
+    %p{:class => 'details'}
       = c.label :email, "Your email"
-      %br
       = c.text_field :email
 
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :subject, "Meeting subject"
-    %br
     = f.text_field :subject, :value => @meeting.subject
 
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :date
-    %br
     = f.text_field :date
     %script
       $('#meeting_date').datetimepicker();
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
       = render "topic_fields", :f => t 
-  %p    
+  %p{:class => 'details'}   
     = link_to_add_fields "add", f, :topics

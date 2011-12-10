@@ -31,12 +31,6 @@ class MeetingsController < ApplicationController
   end
 
   def index
-    @meetings = Meeting.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @meetings }
-    end
   end
 
   # GET /meetings/1
@@ -53,16 +47,17 @@ class MeetingsController < ApplicationController
   # GET /meetings/new
   # GET /meetings/new.json
   def new
-    @meeting = Meeting.new(params[:id])    
+    @meeting = Meeting.new(params[:meeting])
     @meeting.creator = Person.new unless @meeting.creator
     
-    @step = params[:step] ? params[:step] : 'first'
+    if(params[:step] != 'first' and params[:step] != 'details')    
+      @step = 'first'
+    else
+      @step = params[:step]
+    end 
   
     @meeting.build_creator
     topic = @meeting.topics.build
-    #topic.tasks.build
-    
-    puts "new new "
     
     respond_to do |format|
       format.html
@@ -81,10 +76,12 @@ class MeetingsController < ApplicationController
       topic.tasks.build
     end
 
-    if(@meeting.state == 'B')    
-      @step = params[:step] ? params[:step] : 'invites'
+    if(@meeting.state == 'A' or @meeting.state == 'B')    
+      @step = 'invites'
+    elsif(@meeting.state == nil)
+      @step = 'details'  
     else
-      @step = params[:step] ? params[:step] : 'meeting'
+      @step = 'meeting'
     end
 
     puts @step
@@ -107,7 +104,11 @@ class MeetingsController < ApplicationController
     @creator = Person.new(params[:meeting][:creator_attributes])
     @creator.save
     @meeting.creator_id = @creator.id
-    @meeting.date = (DateTime.strptime(params[:meeting][:date], '%m/%d/%Y %H:%M ')).to_datetime
+    begin
+      @meeting.date = (DateTime.strptime(params[:meeting][:date], '%m/%d/%Y %H:%M ')).to_datetime
+    rescue Exception=>e
+      @meeting.date = nil
+    end
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
@@ -150,28 +151,27 @@ class MeetingsController < ApplicationController
       participants = []
       emails.each do |email|
         if email =~ /[^"]*<[^"]*@[^"]*.[^"]*>/
-          participant = Person.new(:name => email.scan(/([^"]*)</)[0][0].strip, :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)   
+          participant = Person.new(:name => email.scan(/([^"]*)</)[0][0].strip, :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
+          participants << participant
         elsif email =~ /<[^"]*@[^"]*.[^"]*>/
-          participant = Person.new(:email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
-        elsif
-          participant = Person.new(:email => email.scan(/([^"]*)/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s) 
+          participant = Person.new(:name => 'Participant name', :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
+          participants << participant
+        elsif email =~ /[^"]*@[^"]*.[^"]*/
+          participant = Person.new(:name => "", :email => email.scan(/([^"]*)/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s) 
+          participants << participant
         end
-        participants << participant
       end
-      puts "cenas"
-      puts "lalalal"
-      @meeting.participants |= participants
+      if participants.length != 0
+        @meeting.participants |= participants
+      end
+      params[:meeting][:mail_list] = ""
       @meeting.save
       @step = 'invites'
     elsif(params[:commit] == "Invite more participants")
       @step = 'invites'
     end
-
-    respond_to do |format|
-      @meeting.topics.each do |topic|
-        topic.tasks = []
-        topic.save
-      end
+  
+    respond_to do |format|     
       if @meeting.update_attributes(params[:meeting])
         if(params[:commit] == "Invite")
           participants.each do |participant|

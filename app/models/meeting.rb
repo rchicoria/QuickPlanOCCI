@@ -8,4 +8,6 @@ class Meeting < ActiveRecord::Base
   accepts_nested_attributes_for :creator, :allow_destroy => true
   accepts_nested_attributes_for :topics, :allow_destroy => true
   accepts_nested_attributes_for :participants, :allow_destroy => true
+
+  validates_presence_of :subject, :date
 end

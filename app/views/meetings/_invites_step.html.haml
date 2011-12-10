@@ -1,4 +1,4 @@
-- app_title "New Meeting"
+- app_title "Invite participants"
 
 #step
   %h3="Invite participants"
@@ -13,7 +13,9 @@
   .form
     = form_for @meeting, :url => {:controller => :meetings, :action => :update} , :html => {:class => 'participants'}  do |f|
       = render "form_management", :f => f
-      %p{:class => 'big-button'}     
-        /= submit_tag 'Go back', :class => 'round'
-        = submit_tag 'Start Meeting', :class => 'round'
+      %p{:class => 'big-button'}
+        - if @meeting.participants.length == 0  
+          = submit_tag 'Start Meeting', :class => 'round disabled', :disabled => true
+        - else
+          = submit_tag 'Start Meeting', :class => 'round'
 - content_for :export_cal, render(:partial => 'export_cal')

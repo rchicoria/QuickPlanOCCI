@@ -1,2 +1,3 @@
-- puts "aquiiiiiiiiiiii"
+- if @step != 'details' and @step != 'first'
+  @step = "details"
 = render :partial => "#{@step}_step"

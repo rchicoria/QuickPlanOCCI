@@ -4,7 +4,7 @@
   %h3="Invite participants"
   
   %p
-    An email was sent to you with the meeting management. You can now share the invitation link with the meeting participants. If you want, you can use the following tool to easily invite them (otherwise you can skip to the meeting management area):
+    An email was sent to you with the meeting management. You can now share the invitation link with the meeting participants. If you want, you can use the following tool to easily invite them:
   
   .form
     = form_for @meeting, :as => :meeting, :url => {:controller => :meetings, :action => :update},  do |f|
@@ -13,7 +13,9 @@
   .form
     = form_for @meeting, :url => {:controller => :meetings, :action => :update} , :html => {:class => 'participants'}  do |f|
       = render "form_management", :f => f
-      %p{:class => 'big-button'}     
-        /= submit_tag 'Go back', :class => 'round'
-        = submit_tag 'Start Meeting', :class => 'round'
+      %p{:class => 'big-button'}
+        - if @meeting.participants.length == 0  
+          = submit_tag 'Start Meeting', :class => 'round disabled', :disabled => true
+        - else
+          = submit_tag 'Start Meeting', :class => 'round'
 - content_for :export_cal, render(:partial => 'export_cal')

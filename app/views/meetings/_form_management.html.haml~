@@ -11,10 +11,10 @@
   = f.fields_for :participants  do |p|   
     %tr    
       %td
-        = p.text_field :name, :value => (@meeting.participants.all[count].name ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value' 
-      %td{:class => 'emailcol'}   
+        = p.text_field :name, :value => (@meeting.participants.all[count].name!='' and @meeting.participants.all[count].name!='' ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value' 
+      %td   
         = p.label :name, @meeting.participants.all[count].email
-      %td{:class => 'rsvpcol'}
+      %td
         - if @meeting.participants.all[count].rsvp == 'yes'
           - rsvp = "Attending"
         - elsif @meeting.participants.all[count].rsvp == 'no'
