@@ -30,11 +30,24 @@
     %br
     = f.text_field :date
     %script
-      $('meeting_date').datetimepicker();
+      $('#meeting_date').datetimepicker();
 .field
   %p
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
-      = render "topic_fields", :f => t 
-  %p    
+      = render "topic_fields", :f => t
+  %p{:style => "display: none"}
     = link_to_add_fields "add", f, :topics
+  %p
+    %br
+
+:javascript
+
+$(function() {
+  $('.last').live('click keyup',function(e) {
+    if ($(this).val() != "") {
+      $(this).attr('class','inputlist');
+      $('#hidden_button').click();
+    }
+  });
+});

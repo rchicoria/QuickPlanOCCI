@@ -1,7 +1,7 @@
 .field
-  %p{:class => 'fields', :style => "margin-top: 0"}
+  %p{:class => 'fields', :style => "margin: 0"}
     - temp = [Person.find(@meeting.creator_id)]
     - temp |= @meeting.participants
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    = f.text_field :description
+    = f.text_field :description, :class => "inputlist last"
     = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
