@@ -111,7 +111,7 @@ class MeetingsController < ApplicationController
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
-        @meeting.management_url = SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+@meeting.id.to_s
+        @meeting.management_url = @meeting.id.to_s
         @meeting.participants = []        
         @meeting.save
         url = (Rails.env.development?) ? "http://localhost:3000/manage/" : "http://localhost:3000/manage/"

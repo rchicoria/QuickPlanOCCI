@@ -111,7 +111,7 @@ class MeetingsController < ApplicationController
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
-        @meeting.management_url = SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+@meeting.id.to_s
+        @meeting.management_url = @@meeting.id.to_s
         @meeting.participants = []        
         @meeting.save
         url = (Rails.env.development?) ? "http://localhost:3000/manage/" : "http://localhost:3000/manage/"
@@ -179,9 +179,9 @@ class MeetingsController < ApplicationController
           end        
         elsif(params[:commit] == "Generate Documentation")
           @meeting.participants.each do |participant|
-            Notifier.invitation_email(participant, @meeting, odt(@meeting)).deliver     
+            Notifier.report_email(participant, @meeting, odt(@meeting)).deliver     
           end
-          Notifier.invitation_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
+          Notifier.report_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
         end
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
