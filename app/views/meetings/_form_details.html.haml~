@@ -28,11 +28,13 @@
   %p
     = f.label :date
     %br
-    = f.datepicker :date, {:dateFormat => 'dd-mm-yy'}
+    = f.text_field :date
+    %script
+      $('meeting_date').datetimepicker();
 .field
   %p
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
       = render "topic_fields", :f => t 
   %p    
-    = link_to_add_fields "add", t, :topics
+    = link_to_add_fields "add", f, :topics

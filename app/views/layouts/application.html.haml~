@@ -8,10 +8,7 @@
     = csrf_meta_tags
   %body
     #container{:class => "round"}
-      %p.green-button
-        Export meeting to:
-        %br
-        %a{:href => "http://www.google.com/calendar/event?action=TEMPLATE&text=#{@gcal[:text]}&dates=#{@gcal[:dates]}&details=#{@gcal[:details]}", :target => "_blank", :class => "round"} Google Calendar
+      = yield :export_cal
       #header{:class => "round shadow"}
         %h1
           %a{:href => root_path} QuickPlan
