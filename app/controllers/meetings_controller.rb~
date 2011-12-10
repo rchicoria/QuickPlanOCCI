@@ -158,8 +158,6 @@ class MeetingsController < ApplicationController
         end
         participants << participant
       end
-      puts "cenas"
-      puts "lalalal"
       @meeting.participants |= participants
       @meeting.save
       @step = 'invites'

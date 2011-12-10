@@ -1,9 +1,7 @@
 .field
-  %p{:class => 'fields'}
-    = f.label :description, "Task"
-    = f.text_field :description
-    - temp = []
+  %p{:class => 'fields', :style => "margin-top: 0"}
+    - temp = [Person.find(@meeting.creator_id)]
     - temp |= @meeting.participants
-    - temp << Person.find(@meeting.creator.id)
-    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }, {:include_blank => 'None'}
-    = link_to_remove_fields "remove", f
+    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
+    = f.text_field :description
+    = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f

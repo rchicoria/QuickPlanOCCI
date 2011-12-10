@@ -7,15 +7,14 @@
 
 - count = 0
 
-%table
+%div{:style => "width: 510px; margin: 0 auto 0 auto; background: #DDD"}
   - count = 0
-  = f.fields_for :topics  do |p|  
-    - puts "ddddddddddddd"+count.to_s   
+  = f.fields_for :topics  do |p|
     .field
       %p{:class => 'fields'}
         = p.label :name, @meeting.topics.all[count].name
         %br
-        = p.text_area :description, :cols => 100
+        = p.text_area :description, :class => 'topic'
       - count += 1
       = p.fields_for :tasks do |t|
         = render "task_fields", :f => t
