@@ -112,12 +112,16 @@ class MeetingsController < ApplicationController
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
+        flash[:notice] = "An email was sent to you with the meeting management. If you want, you can use the following tool to easily invite them:"
         @meeting.management_url = SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+@meeting.id.to_s
         @meeting.participants = []        
         @meeting.save
         url = (Rails.env.development?) ? "http://localhost:3000/manage/" : "http://quickplan.heroku.com/manage/"
-        url = url + @meeting.management_url  
-        Notifier.management_email(@meeting, url).deliver
+        url = url + @meeting.management_url
+        begin
+          Notifier.management_email(@meeting, url).deliver
+        rescue Exception=>e    
+        end        
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => "invites")}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => "invites")}
         format.json { render json: @meeting, status: :created, location: @meeting }
@@ -175,13 +179,22 @@ class MeetingsController < ApplicationController
       if @meeting.update_attributes(params[:meeting])
         if(params[:commit] == "Invite")
           participants.each do |participant|
-            Notifier.invitation_email(participant, @meeting).deliver     
+            begin
+              Notifier.invitation_email(participant, @meeting).deliver     
+            rescue Exception=>e
+            end          
           end        
         elsif(params[:commit] == "Generate Documentation")
           @meeting.participants.each do |participant|
-            Notifier.report_email(participant, @meeting, odt(@meeting)).deliver     
+            begin            
+              Notifier.report_email(participant, @meeting, odt(@meeting)).deliver     
+            rescue Exception=>e
+            end          
           end
-          Notifier.report_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
+          begin
+            Notifier.report_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
+          rescue Exception=>e
+          end        
         end
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}

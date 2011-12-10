@@ -274,8 +274,21 @@ ul#tabs li.selected {
   text-align: left;
 }
 
-p.details {
+p.details label {
   display: block;
+}
+
+p.big-button input.disabled {
+  background: #ff9d62;
+}
+
+.notice{
+  width: 80%;
+  background: #c8f5f6;
+  text-align: left;
+  padding: 15px;
+  -moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 /*bug do datepicker*/

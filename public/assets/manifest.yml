@@ -3,6 +3,7 @@ g_tick.png: g_tick-25f728fb74e47722d05ee12ec5975a08.png
 r_delete.png: r_delete-4acd82a95d4fa42baa48c473fb4b0391.png
 rails.png: rails-e4b51606cd77fda2615e7439907bfc92.png
 w_delete.png: w_delete-b70778e5f28aa696d2eb06b62c40996f.png
+w_faq.png: w_faq-d0b4d845016485282c1045a35e624edf.png
 w_tick.png: w_tick-784c47367db92d35c49e1e97db96dcf7.png
 application.js: application-496c82fc4d525cd7065cdddc011e135f.js
-application.css: application-c036c17fa06fffe384b5e811d898724f.css
+application.css: application-e2d8973ab2276b3c89538707a366703a.css

@@ -1,13 +1,14 @@
-- app_title "New Meeting"
+- app_title "Invite participants"
 
 #step
-  %h3="Invite participants"
-  
-  %p
-    An email was sent to you with the meeting management. You can now share the invitation link with the meeting participants. If you want, you can use the following tool to easily invite them:
+  %h3="Meeting Management"
   
   .form
     = form_for @meeting, :as => :meeting, :url => {:controller => :meetings, :action => :update},  do |f|
+      - if flash[:notice]
+        %p
+          .notice
+            = flash[:notice]      
       = render "form_invites", :f => f     
 
   .form

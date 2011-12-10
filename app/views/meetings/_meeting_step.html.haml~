@@ -1,4 +1,4 @@
-- app_title "Invite participants"
+- app_title "Meeting"
 
 #tabsdiv{:class=>"topround"}
   %ul{:id=>"tabs"}

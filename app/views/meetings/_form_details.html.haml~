@@ -10,25 +10,25 @@
       = c.text_field :name
 
   .field
-    %p
+    %p{:class => 'details'}
       = c.label :email, "Your email"
       = c.text_field :email
 
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :subject, "Meeting subject"
     = f.text_field :subject, :value => @meeting.subject
 
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :date
     = f.text_field :date
     %script
       $('#meeting_date').datetimepicker();
 .field
-  %p
+  %p{:class => 'details'}
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
       = render "topic_fields", :f => t 
-  %p    
+  %p{:class => 'details'}   
     = link_to_add_fields "add", f, :topics
