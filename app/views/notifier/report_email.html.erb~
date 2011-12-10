@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <p>The meeting <%=@meeting.subject%> is now over. Here is the report sent to the group.</p>
+  </body>
+</html>
