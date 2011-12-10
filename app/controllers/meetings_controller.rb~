@@ -1,6 +1,36 @@
 class MeetingsController < ApplicationController
   # GET /meetings
   # GET /meetings.json
+
+  def odt(meeting)
+    report = ODFReport::Report.new("#{Rails.root}/app/test.odt") do |r|
+      
+      r.add_field "SUBJECT",  meeting.subject
+      r.add_field "DATE", meeting.date.to_s
+      r.add_field "HOSTED_BY", Person.find(meeting.creator_id).name
+      attendances = []
+      meeting.participants.each do |participant|
+        if participant.presence == "yes"
+          attendances << participant.name        
+        end
+      end
+      r.add_field "ATTENDANCES", attendances.join(", ")
+      tasks = ""
+      meeting.topics.each do |topic|
+        tasks += topic.name+":\n\n"+topic.description+"\n\n"
+        topic.tasks.each do |task|
+          tasks += task.description+": "+Person.find(task.person_id).name+"\n"
+        end
+        tasks += "\n"
+      end
+      r.add_field "TOPICS_AND_TASKS", tasks
+    end
+
+    report_file_name = report.generate
+
+    send_file(report_file_name)  
+  end
+
   def index
     @meetings = Meeting.all
 
@@ -83,6 +113,7 @@ class MeetingsController < ApplicationController
   def create
     @meeting = Meeting.new(params[:meeting])
     @creator = Person.new(params[:meeting][:creator_attributes])
+    @creator.save
     @meeting.creator_id = @creator.id
     @meeting.state = 'A'
     respond_to do |format|
@@ -144,13 +175,18 @@ class MeetingsController < ApplicationController
     end
 
     respond_to do |format|
+      @meeting.topics.each do |topic|
+        topic.tasks = []      
+      end
+      @meeting.save
       if @meeting.update_attributes(params[:meeting])
         if(params[:commit] == "Invite")
           participants.each do |participant|
             Notifier.invitation_email(participant, @meeting).deliver     
           end        
+        elsif(params[:commit] == "Generate Documentation")
+          odt(@meeting) and return
         end
-        puts "ceeeeeeeeeeeeeeenas"
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.json { head :ok }

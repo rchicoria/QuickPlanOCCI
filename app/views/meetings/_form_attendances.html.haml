@@ -15,7 +15,7 @@
       %td         
         = p.label :email, @meeting.participants.all[count].email
       %td
-        - temp = (@meeting.participants.all[count].rsvp == 'yes')
+        - temp = ((@meeting.participants.all[count].presence ? @meeting.participants.all[count].presence : @meeting.participants.all[count].rsvp) == 'yes')
         = p.radio_button(:presence, "yes", :checked => temp)
         = label_tag(:presence, "Attended")
         = p.radio_button(:presence, "no", :checked => !temp)
