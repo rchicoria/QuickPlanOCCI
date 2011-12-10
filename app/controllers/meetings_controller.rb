@@ -17,11 +17,13 @@ class MeetingsController < ApplicationController
       r.add_field "ATTENDANCES", attendances.join(", ")
       tasks = "\n"
       meeting.topics.each do |topic|
-        tasks += topic.name+":\n"+topic.description+"\n"
-        topic.tasks.each do |task|
-          tasks += Person.find(task.person_id).name+": "+task.description+"\n"
+        if topic.description
+          tasks += topic.name+":\n"+topic.description+"\n"
+          topic.tasks.each do |task|
+            tasks += Person.find(task.person_id).name+": "+task.description+"\n"
+          end
+          tasks += "\n"
         end
-        tasks += "\n"
       end
       r.add_field "TOPICS_AND_TASKS", tasks
     end
@@ -110,6 +112,11 @@ class MeetingsController < ApplicationController
       @meeting.date = nil
     end
     @meeting.state = 'A'
+    @meeting.topics.each do |topic|
+      if topic.name == nil or topic.name.size == 0
+        @meeting.topics.delete(topic)
+      end
+    end
     respond_to do |format|
       if @meeting.save
         flash[:notice] = "An email was sent to you with the meeting management. If you want, you can use the following tool to easily invite them:"

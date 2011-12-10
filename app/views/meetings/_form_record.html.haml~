@@ -8,8 +8,13 @@
 - count = 0
 
 %div{:style => "width: 510px; margin: 0 auto 0 auto"}
+<<<<<<< HEAD
   - count = 
   = f.fields_for :topics  do |p|   
+=======
+  - count = 0
+  = f.fields_for :topics  do |p|
+>>>>>>> fbae6d4f52611adf0989242e151ec5f42a4fc474
     .field
       %p{:class => 'fields'}
         = p.label :name, @meeting.topics.all[count].name
@@ -18,5 +23,18 @@
       - count += 1
       = p.fields_for :tasks do |t|
         = render "task_fields", :f => t
-      %p    
+      %p{:style => "display: none"} 
         = link_to_add_fields "add", p, :tasks
+      %p
+        %br
+
+:javascript
+
+$(function() {
+  $('.last').live('click keyup',function(e) {
+    if ($(this).val() != "") {
+      $(this).attr('class','inputlist');
+      $('#hidden_button').click();
+    }
+  });
+});

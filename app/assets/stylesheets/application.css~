@@ -257,6 +257,7 @@ ul#tabs li.selected {
 	color: #AAA;
 }
 
+<<<<<<< HEAD
 #errorExplanation {
   width: 100%;
   background: #ff8c8c;
@@ -283,12 +284,40 @@ p.big-button input.disabled {
 }
 
 .notice{
-  width: 80%;
+  width: 100%;
   background: #c8f5f6;
   text-align: left;
   padding: 15px;
   -moz-border-radius: 10px;
 	border-radius: 10px;
+=======
+.radio-yes{
+	background:url('w_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-yes{
+	background:url('g_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-no{
+	background:url('w_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-no{
+	background:url('r_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+
+.even{
+	background:white;
+}
+.odd{
+	background:#EEE;
+>>>>>>> fbae6d4f52611adf0989242e151ec5f42a4fc474
 }
 
 /*bug do datepicker*/

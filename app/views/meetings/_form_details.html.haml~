@@ -29,6 +29,25 @@
   %p{:class => 'details'}
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
+<<<<<<< HEAD
       = render "topic_fields", :f => t 
-  %p{:class => 'details'}   
+  %p{}   
+=======
+      = render "topic_fields", :f => t
+  %p{:style => "display: none", :class => 'details'}
+>>>>>>> fbae6d4f52611adf0989242e151ec5f42a4fc474
     = link_to_add_fields "add", f, :topics
+  %p
+    %br
+
+:javascript
+
+$(function() {
+  $('.last').live('click keyup',function(e) {
+    if ($(this).val() != "") {
+      $(this).attr('class','inputlist');
+      $(this).next('span').show();
+      $('#hidden_button').click();
+    }
+  });
+});

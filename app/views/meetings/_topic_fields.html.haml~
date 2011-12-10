@@ -1,4 +1,4 @@
 .field
   %p{:class => 'fields'}
-    = f.text_field :name
-    = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -7px"), f
+    = f.text_field :name, :class => "inputlist last"
+    = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -9px"), f

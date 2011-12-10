@@ -8,6 +8,6 @@
     = link_to_remove_fields "remove", f
 =======
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    = f.text_field :description
+    = f.text_field :description, :class => "inputlist last"
     = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
 >>>>>>> 3848bb8d976616844979bbef71e1048654db799d

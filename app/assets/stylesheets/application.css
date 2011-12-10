@@ -289,6 +289,33 @@ p.big-button input.disabled {
   padding: 15px;
   -moz-border-radius: 10px;
 	border-radius: 10px;
+
+.radio-yes{
+	background:url('w_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-yes{
+	background:url('g_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-no{
+	background:url('w_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-no{
+	background:url('r_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+
+.even{
+	background:white;
+}
+.odd{
+	background:#EEE;
 }
 
 /*bug do datepicker*/
