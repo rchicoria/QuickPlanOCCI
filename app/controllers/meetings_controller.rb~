@@ -15,11 +15,11 @@ class MeetingsController < ApplicationController
         end
       end
       r.add_field "ATTENDANCES", attendances.join(", ")
-      tasks = ""
+      tasks = "\n"
       meeting.topics.each do |topic|
-        tasks += topic.name+":\n\n"+topic.description+"\n\n"
+        tasks += topic.name+":\n"+topic.description+"\n"
         topic.tasks.each do |task|
-          tasks += task.description+": "+Person.find(task.person_id).name+"\n"
+          tasks += Person.find(task.person_id).name+": "+task.description+"\n"
         end
         tasks += "\n"
       end
@@ -157,14 +157,18 @@ class MeetingsController < ApplicationController
           participant = Person.new(:name => 'Participant name', :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
           participants << participant
         elsif email =~ /[^"]*@[^"]*.[^"]*/
-          participant = Person.new(:name => "", :email => email.scan(/([^"]*)/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s) 
+          participant = Person.new(:name => "Participant name", :email => email.scan(/([^"]*)/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s) 
           participants << participant
         end
       end
+<<<<<<< HEAD
       if participants.length != 0
         @meeting.participants |= participants
       end
       params[:meeting][:mail_list] = ""
+=======
+      @meeting.participants |= participants
+>>>>>>> 3848bb8d976616844979bbef71e1048654db799d
       @meeting.save
       @step = 'invites'
     elsif(params[:commit] == "Invite more participants")

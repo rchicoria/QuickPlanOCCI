@@ -7,19 +7,36 @@
 
 - count = 0
 
-%table
-  = f.fields_for :participants  do |p|   
+%table{:id => "stripe", :style => "width: 510px; margin: 0 auto 0 auto"}
+  = f.fields_for :participants  do |p|
     %tr    
+<<<<<<< HEAD
       %td
-        = p.text_field :name, :value => (@meeting.participants.all[count].name!='' and @meeting.participants.all[count].name!='' ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value' 
+        = p.text_field :name, :value => ((@meeting.participants.all[count].name!='' and @meeting.participants.all[count].name!='') ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value' 
       %td   
         = p.label :name, @meeting.participants.all[count].email
       %td
+=======
+      %td{:style => "text-align: left"}
+>>>>>>> 3848bb8d976616844979bbef71e1048654db799d
         - if @meeting.participants.all[count].rsvp == 'yes'
-          - rsvp = "Attending"
+          - rsvp = image_tag("g_tick.png", :style => "margin-bottom:-8px")
         - elsif @meeting.participants.all[count].rsvp == 'no'
-          - rsvp = "Not attending"
+          - rsvp = image_tag("r_delete.png", :style => "margin-bottom:-8px")
         - else
-          - rsvp = "Awaiting reply"
+          - rsvp = image_tag("w_faq.png", :style => "margin-bottom:-8px")
         = p.label :rsvp, rsvp
+        = p.text_field :name, :style => "width: 200px", :value => (@meeting.participants.all[count].name ? @meeting.participants.all[count].name : 'Participant name'), :onfocus => '(this.value == "Participant name") ? this.value = "" : this.value'
+        %i
+          = "(#{@meeting.participants.all[count].email})"
     - count+=1
+
+:javascript
+  if(document.getElementsByTagName){
+    var table = document.getElementById("stripe");
+    var rows = table.getElementsByTagName("tr");
+    for(i = 0; i < rows.length; i++){
+      if(i % 2 == 0) rows[i].className = "even";
+      else rows[i].className = "odd";
+    }
+  }

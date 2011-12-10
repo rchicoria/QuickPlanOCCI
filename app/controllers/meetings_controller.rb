@@ -15,11 +15,11 @@ class MeetingsController < ApplicationController
         end
       end
       r.add_field "ATTENDANCES", attendances.join(", ")
-      tasks = ""
+      tasks = "\n"
       meeting.topics.each do |topic|
-        tasks += topic.name+":\n\n"+topic.description+"\n\n"
+        tasks += topic.name+":\n"+topic.description+"\n"
         topic.tasks.each do |task|
-          tasks += task.description+": "+Person.find(task.person_id).name+"\n"
+          tasks += Person.find(task.person_id).name+": "+task.description+"\n"
         end
         tasks += "\n"
       end

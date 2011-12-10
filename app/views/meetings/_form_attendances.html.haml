@@ -7,18 +7,68 @@
 
 - count = 0
 
-%table
+%table{:id => "stripe", :style => "width: 510px; margin: 0 auto 0 auto"}
   = f.fields_for :participants  do |p|   
     %tr    
-      %td
-        = p.label :name, @meeting.participants.all[count].name
-      %td         
-        = p.label :email, @meeting.participants.all[count].email
+      %td{:style => "text-align: left"}
+        %b
+          = @meeting.participants.all[count].name
+        %i
+          = "(#{@meeting.participants.all[count].email})"
       %td
         - temp = ((@meeting.participants.all[count].presence ? @meeting.participants.all[count].presence : @meeting.participants.all[count].rsvp) == 'yes')
         = p.radio_button(:presence, "yes", :checked => temp)
-        = label_tag(:presence, "Attended")
+      %td
         = p.radio_button(:presence, "no", :checked => !temp)
-        = label_tag(:presence, "Not attended")
     - count+=1
 
+:javascript
+
+$(function() {
+  var table = document.getElementById("stripe");
+  var rows = table.getElementsByTagName("tr");
+  for(i = 0; i < rows.length; i++){
+    if(i % 2 == 0)
+      rows[i].className = "even";
+    else
+      rows[i].className = "odd";
+  }
+});
+$(function() {
+    $('input:radio[value="yes"]').each(function() {
+        if ( this.checked==true )
+          $('<a class="radio-fx-yes" href="#"><div class="radio-checked-yes"></div></a>').insertAfter(this);
+        else
+          $('<a class="radio-fx-yes" href="#"><div class="radio-yes"></div></a>').insertAfter(this);
+        $(this).hide();
+    });
+    $('.radio-fx-yes').live('click',function(e) {
+        e.preventDefault();
+          var $check = $(this).prev('input');
+          $(this).find('div').attr('class','radio-checked-yes');          
+          $check.attr('checked', true);
+          $('.radio-fx-no div').each(function() {
+              var $par = $(this).parent().prev('input').get(0);
+              if ( $par.checked==false ) $(this).parent().find('div').attr('class','radio-no'); 
+          });
+    });
+});
+$(function() {
+    $('input:radio[value="no"]').each(function() {
+        if ( this.checked==true )
+          $('<a class="radio-fx-no" href="#"><div class="radio-checked-no"></div></a>').insertAfter(this);
+        else
+          $('<a class="radio-fx-no" href="#"><div class="radio-no"></div></a>').insertAfter(this);
+        $(this).hide();
+    });
+    $('.radio-fx-no').live('click',function(e) {
+        e.preventDefault();
+          var $check = $(this).prev('input');
+          $(this).find('div').attr('class','radio-checked-no');          
+          $check.attr('checked', true);
+          $('.radio-fx-yes div').each(function() {
+              var $par = $(this).parent().prev('input').get(0);
+              if ( $par.checked==false ) $(this).parent().find('div').attr('class','radio-yes'); 
+          });
+    });
+});

@@ -7,7 +7,7 @@ class Notifier < ActionMailer::Base
     mail(:to => meeting.creator.email, :subject => "QuickPlan: Meeting Management URL")
   end
   def invitation_email(participant, meeting)
-    @url = (Rails.env.development?) ? "http://localhost:3000/rsvp/" : "http://localhost:3000/rsvp/"
+    @url = (Rails.env.development?) ? "http://localhost:3000/rsvp/" : "http://quickplan.heroku.com/rsvp/"
     @url = @url + participant.invitation_url
     @participant = participant
     @meeting = meeting
