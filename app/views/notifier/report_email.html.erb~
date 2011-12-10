@@ -4,6 +4,31 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p>The meeting <%=@meeting.subject%> is now over. Here is the report sent to the group.</p>
+    <h1>
+      <a href="http://quickplan.heroku.com" style="text-decoration: none; color: #9EDEEC">
+        QuickPlan
+      </a>
+    </h1>
+    <p style="margin-top: 30px">
+      The meeting "<%= @meeting.subject %>" is now over. You may find its record in the attachment.
+    </p>
+    <%
+      list = []
+      @meeting.topics.each do |topic|
+        topic.tasks.each do |task|
+          if Person.find(task) == @participant
+            list << "#{topic.name}: #{task.description}"
+          end
+        end
+      end
+    %>
+    <% if list.size > 0 %>
+    <p>
+      Here are the tasks assigned to you:<br />
+      <% list.each do |topic| %>
+        - <%= topic %><br />
+      <% end %>
+    </p>
+    <% end %>
   </body>
 </html>

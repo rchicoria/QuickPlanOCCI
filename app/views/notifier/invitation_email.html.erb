@@ -4,12 +4,25 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <p><%=@meeting.invitation_text%></p>
-    <p>Topics:
-    <% @meeting.topics.each do |topic| %>
-      <p><%= topic.name%></p>
-    <% end %>
-    <p>Confirmation</p>
-    <p><%=link_to "Yes", @url+"/yes"%>   <%=link_to "No", @url+"/no"%></p>  
+    <h1>
+      <a href="http://quickplan.heroku.com" style="text-decoration: none; color: #9EDEEC">
+        QuickPlan
+      </a>
+    </h1>
+    <p style="margin-top: 30px">
+      <%= Person.find(@meeting.creator_id).name %> has just invited you to attend the meeting:
+    </p>
+    <p>
+      <b>Subject:</b> <%= @meeting.subject %><br />
+      <b>Date:</b> <%= @meeting.date.to_s %><br />
+      <b>Topics:</b><br />
+      <% @meeting.topics.each do |topic| %>
+        - <%= topic.name %><br />
+      <% end %>
+    </p>
+    <p>
+      Are you attending this meeting?<br />
+      <%= link_to "Yes", @url+"/yes" %> | <%= link_to "No", @url+"/no" %>
+    </p>  
   </body>
 </html>
