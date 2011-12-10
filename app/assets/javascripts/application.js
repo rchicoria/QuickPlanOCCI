@@ -40,3 +40,10 @@ function showRecord()
   document.getElementById("tab3").className = 'topround';
 }
 
+function add_new_text_field(field)
+{
+  if($(field).val() == "")
+  {
+    $('hidden_button').click();  
+  }
+}

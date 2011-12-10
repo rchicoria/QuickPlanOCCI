@@ -22,31 +22,26 @@ function add_fields(link, association, content) {
 
 function showAttendances()
 {
-  //document.getElementById('attendances').style.display = 'block';
+  document.getElementById('attendances').style.display = 'block';
   document.getElementById("tab1").className = 'selected topround';
-  //document.getElementById('record').style.display = 'none';
+  document.getElementById('record').style.display = 'none';
   document.getElementById("tab2").className = 'topround';
-  //document.getElementById('tasks').style.display = 'none';
+  document.getElementById('tasks').style.display = 'none';
   document.getElementById("tab3").className = 'topround';
 }
 
 function showRecord()
 {
-  //document.getElementById('attendances').style.display = 'none';
+  document.getElementById('attendances').style.display = 'none';
   document.getElementById("tab1").className = 'topround';
-  //document.getElementById('record').style.display = 'block';
+  document.getElementById('record').style.display = 'block';
   document.getElementById("tab2").className = 'selected topround';
-  //document.getElementById('tasks').style.display = 'none';
+  document.getElementById('tasks').style.display = 'none';
   document.getElementById("tab3").className = 'topround';
 }
 
-function showTasks()
-{
-  //document.getElementById('attendances').style.display = 'none';
-  document.getElementById("tab1").className = 'topround';
-  //document.getElementById('record').style.display = 'none';
-  document.getElementById("tab2").className = 'topround';
-  //document.getElementById('tasks').style.display = 'block';
-  document.getElementById("tab3").className = 'selected topround';
+function add_new_text_field(field){
+  if $(field).val() == ""{
+    $('hidden_button').click();  
+  }
 }
-

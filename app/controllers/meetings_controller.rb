@@ -27,8 +27,7 @@ class MeetingsController < ApplicationController
     end
 
     report_file_name = report.generate
-
-    send_file(report_file_name)  
+    return report_file_name  
   end
 
   def index
@@ -179,7 +178,10 @@ class MeetingsController < ApplicationController
             Notifier.invitation_email(participant, @meeting).deliver     
           end        
         elsif(params[:commit] == "Generate Documentation")
-          odt(@meeting) and return
+          @meeting.participants.each do |participant|
+            Notifier.report_email(participant, @meeting, odt(@meeting)).deliver     
+          end
+          Notifier.report_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
         end
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}

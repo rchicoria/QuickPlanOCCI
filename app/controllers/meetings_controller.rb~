@@ -27,8 +27,7 @@ class MeetingsController < ApplicationController
     end
 
     report_file_name = report.generate
-
-    send_file(report_file_name)  
+    return report_file_name  
   end
 
   def index
@@ -108,7 +107,7 @@ class MeetingsController < ApplicationController
     @creator = Person.new(params[:meeting][:creator_attributes])
     @creator.save
     @meeting.creator_id = @creator.id
-    @meeting.date = (Date.strptime(params[:meeting][:date], '%m/%d/%Y %H:%M ')).to_date
+    @meeting.date = (DateTime.strptime(params[:meeting][:date], '%m/%d/%Y %H:%M ')).to_datetime
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
@@ -170,16 +169,19 @@ class MeetingsController < ApplicationController
 
     respond_to do |format|
       @meeting.topics.each do |topic|
-        topic.tasks = []      
+        topic.tasks = []
+        topic.save
       end
-      @meeting.save
       if @meeting.update_attributes(params[:meeting])
         if(params[:commit] == "Invite")
           participants.each do |participant|
             Notifier.invitation_email(participant, @meeting).deliver     
           end        
         elsif(params[:commit] == "Generate Documentation")
-          odt(@meeting) and return
+          @meeting.participants.each do |participant|
+            Notifier.invitation_email(participant, @meeting, odt(@meeting)).deliver     
+          end
+          Notifier.invitation_email(Person.find(@meeting.creator_id), @meeting, odt(@meeting)).deliver 
         end
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
         format.js   { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => @step)}
