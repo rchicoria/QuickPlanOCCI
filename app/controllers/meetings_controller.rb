@@ -111,10 +111,10 @@ class MeetingsController < ApplicationController
     @meeting.state = 'A'
     respond_to do |format|
       if @meeting.save
-        @meeting.management_url = @meeting.id.to_s
+        @meeting.management_url = SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+@meeting.id.to_s
         @meeting.participants = []        
         @meeting.save
-        url = (Rails.env.development?) ? "http://localhost:3000/manage/" : "http://localhost:3000/manage/"
+        url = (Rails.env.development?) ? "http://localhost:3000/manage/" : "http://quickplan.heroku.com/manage/"
         url = url + @meeting.management_url  
         Notifier.management_email(@meeting, url).deliver
         format.html { redirect_to edit_meeting_path(:id => @meeting.management_url, :step => "invites")}

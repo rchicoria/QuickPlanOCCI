@@ -16,7 +16,7 @@ class Notifier < ActionMailer::Base
   def report_email(participant, meeting, report)
     @participant = participant
     @meeting = meeting
-    attachments['report.odf'] = File.read(report)
+    attachments['record.odf'] = File.read(report)
     mail(:to => participant.email, :subject => "QuickPlan: Meeting Report")
   end
 end
