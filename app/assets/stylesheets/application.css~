@@ -257,6 +257,7 @@ ul#tabs li.selected {
 	color: #AAA;
 }
 
+<<<<<<< HEAD
 #errorExplanation {
   width: 100%;
   background: #ff8c8c;
@@ -290,6 +291,8 @@ p.big-button input.disabled {
   -moz-border-radius: 10px;
 	border-radius: 10px;
 
+=======
+>>>>>>> 6c8e11145ffd8b87a653acd00b83a94f1eb88f12
 .radio-yes{
 	background:url('w_tick.png') no-repeat;
 	width:32px;

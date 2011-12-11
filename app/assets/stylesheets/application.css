@@ -319,6 +319,15 @@ p.big-button input.disabled {
 	background:#EEE;
 }
 
+.fields select{
+	width:165px;
+	font-size:80%;
+}
+
+.fields input[type="text"]{
+	font-size:80%;
+}
+
 /*bug do datepicker*/
 #ui-datepicker-div {
   display: none;
