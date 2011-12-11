@@ -48,7 +48,7 @@ $(function() {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');
       $(this).next('span').show();
-      $('#hidden_button').click();
+      $(this).parent().parent().parent().find('.hidden_button').click();
     }
   });
 });

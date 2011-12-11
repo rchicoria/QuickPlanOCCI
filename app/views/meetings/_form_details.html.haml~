@@ -47,7 +47,10 @@ $(function() {
   $('.last').live('click keyup',function(e) {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');
-      $('#hidden_button').click();
+      $(this).next('span').show();
+      console.log($(this).parent().parent().parent().find('.hidden_button'));
+      $(this).parent().parent().parent().find('.hidden_button').click();
+      //$('.hidden_button').click();
     }
   });
 });
