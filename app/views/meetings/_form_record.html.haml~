@@ -28,6 +28,18 @@
 :javascript
 
 $(function() {
+  $('.last').each(function() {
+    if ($(this).val() != "") {
+      $(this).attr('class','inputlist');
+      $(this).next('span').show();
+    }
+  });
+  $('.inputlist').live('onblur',function(e) {
+    if ($(this).val() == "") {
+      alert("remove");
+      remove_fields(this);
+    }
+  });
   $('.last').live('click keyup',function(e) {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');

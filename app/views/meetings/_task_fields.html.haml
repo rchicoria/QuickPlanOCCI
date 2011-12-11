@@ -3,6 +3,6 @@
     - temp = [Person.find(@meeting.creator_id)]
     - temp |= @meeting.participants
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    = f.text_field :description, :class => "inputlist last"
+    = f.text_field :description, :class => "inputlist last", :onblur => "if ($(this).val() == \"\") $(this).parent().find('.remove').click();"
     %span{:style => "display: none"}
       = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f

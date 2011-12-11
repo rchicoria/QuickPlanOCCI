@@ -3,12 +3,6 @@
     - temp = [Person.find(@meeting.creator_id)]
     - temp |= @meeting.participants
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    - if i == max
-      = f.text_field :description, :class => "inputlist"
-      = i
-      %span
-        = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
-    - else
-      = f.text_field :description, :class => "inputlist last"
-      %span{:style => "display: none"}
-        = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
+    = f.text_field :description, :class => "inputlist last", :onblur => "if ($(this).val() == \"\") remove_fields(this);"
+    %span{:style => "display: none"}
+      = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
