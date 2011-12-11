@@ -161,7 +161,8 @@ class MeetingsController < ApplicationController
       emails = params[:meeting][:mail_list].split(',')  
       participants = []
       emails.each do |email|
-        if email =~ /[^"]*<[^"]*@[^"]*.[^"]*>/
+        email = email.gsub("\"","")
+        if email =~ /[^"]*[ ]*<[^"]*@[^"]*.[^"]*>/
           participant = Person.new(:name => email.scan(/([^"]*)</)[0][0].strip, :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
           participants << participant
         elsif email =~ /<[^"]*@[^"]*.[^"]*>/

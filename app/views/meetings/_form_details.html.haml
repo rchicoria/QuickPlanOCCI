@@ -29,7 +29,6 @@
   %p{:class => 'details'}
     = f.label :topics, "Meeting topics"
     = f.fields_for :topics do |t|
-      = render "topic_fields", :f => t 
       = render "topic_fields", :f => t
   %p{:style => "display: none"}
     = link_to_add_fields "add", f, :topics

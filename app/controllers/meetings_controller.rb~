@@ -17,18 +17,12 @@ class MeetingsController < ApplicationController
       r.add_field "ATTENDANCES", attendances.join(", ")
       tasks = "\n"
       meeting.topics.each do |topic|
-<<<<<<< HEAD
-        tasks += topic.name+":\n"+topic.description+"\n"
-        topic.tasks.each do |task|
-          tasks += Person.find(task.person_id).name+": "+task.description+"\n"
-=======
         if topic.description
           tasks += topic.name+":\n"+topic.description+"\n"
           topic.tasks.each do |task|
             tasks += Person.find(task.person_id).name+": "+task.description+"\n"
           end
           tasks += "\n"
->>>>>>> fbae6d4f52611adf0989242e151ec5f42a4fc474
         end
       end
       r.add_field "TOPICS_AND_TASKS", tasks
@@ -118,6 +112,11 @@ class MeetingsController < ApplicationController
       @meeting.date = nil
     end
     @meeting.state = 'A'
+    @meeting.topics.each do |topic|
+      if topic.name == nil or topic.name.size == 0
+        @meeting.topics.delete(topic)
+      end
+    end
     respond_to do |format|
       if @meeting.save
         flash[:notice] = "An email was sent to you with the meeting management. If you want, you can use the following tool to easily invite them:"
@@ -162,7 +161,8 @@ class MeetingsController < ApplicationController
       emails = params[:meeting][:mail_list].split(',')  
       participants = []
       emails.each do |email|
-        if email =~ /[^"]*<[^"]*@[^"]*.[^"]*>/
+        email = mail.gsub("\"","")
+        if email =~ /[^"]*[ ]*<[^"]*@[^"]*.[^"]*>/
           participant = Person.new(:name => email.scan(/([^"]*)</)[0][0].strip, :email => email.scan(/<([^"]*)>/)[0][0].strip, :invitation_url => SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+participants.length.to_s)
           participants << participant
         elsif email =~ /<[^"]*@[^"]*.[^"]*>/
