@@ -257,9 +257,8 @@ ul#tabs li.selected {
 	color: #AAA;
 }
 
-<<<<<<< HEAD
 #errorExplanation {
-  width: 100%;
+  width: 480px;
   background: #ff8c8c;
   text-align: left;
   padding: 15px;
@@ -283,16 +282,19 @@ p.big-button input.disabled {
   background: #ff9d62;
 }
 
+p.big-button input.disabled:hover {
+  cursor: auto;
+}
+
 .notice{
-  width: 100%;
+  width: 480px;
   background: #c8f5f6;
   text-align: left;
   padding: 15px;
   -moz-border-radius: 10px;
 	border-radius: 10px;
+}
 
-=======
->>>>>>> 6c8e11145ffd8b87a653acd00b83a94f1eb88f12
 .radio-yes{
 	background:url('w_tick.png') no-repeat;
 	width:32px;
@@ -319,6 +321,15 @@ p.big-button input.disabled {
 }
 .odd{
 	background:#EEE;
+}
+
+.fields select{
+	width:165px;
+	font-size:80%;
+}
+
+.fields input[type="text"]{
+	font-size:80%;
 }
 
 /*bug do datepicker*/

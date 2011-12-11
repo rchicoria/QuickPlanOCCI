@@ -2,12 +2,13 @@
   %p{:class => 'fields', :style => "margin: 0"}
     - temp = [Person.find(@meeting.creator_id)]
     - temp |= @meeting.participants
-<<<<<<< HEAD
-    - temp << Person.find(@meeting.creator_id)
     = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    = link_to_remove_fields "remove", f
-=======
-    = f.select :person_id, temp.collect {|p| [ p.name, p.id ] }
-    = f.text_field :description, :class => "inputlist last"
-    = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
->>>>>>> 3848bb8d976616844979bbef71e1048654db799d
+    - if i == max
+      = f.text_field :description, :class => "inputlist"
+      = i
+      %span
+        = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f
+    - else
+      = f.text_field :description, :class => "inputlist last"
+      %span{:style => "display: none"}
+        = link_to_remove_fields image_tag("w_delete.png", :style => "margin-bottom: -10px"), f

@@ -9,23 +9,31 @@
 
 %div{:style => "width: 510px; margin: 0 auto 0 auto"}
   - count = 0
-  = f.fields_for :topics  do |p|   
-    .field
-      %p{:class => 'fields'}
-        = p.label :name, @meeting.topics.all[count].name
-        %br
-        = p.text_area :description, :class => 'topic'
-      - count += 1
-      = p.fields_for :tasks do |t|
-        = render "task_fields", :f => t
-      %p{:style => "display: none"} 
-        = link_to_add_fields "add", p, :tasks
-      %p
-        %br
+  - @meeting.topics.each do |topic|
+    = f.fields_for :topics, topic  do |p|   
+      .field
+        %p{:class => 'fields'}
+          = p.label :name, @meeting.topics.all[count].name
+          %br
+          = p.text_area :description, :class => 'topic'
+        - count += 1
+        - topic.tasks.each.with_index do |task,index|
+          = p.fields_for :tasks, task do |t|
+            = render "task_fields", :f => t
+        %p{:style => "display: none"} 
+          = link_to_add_fields "add", p, :tasks
+        %p
+          %br
 
 :javascript
 
 $(function() {
+  $('.last').each(function() {
+    if ($(this).val() != "") {
+      $(this).attr('class','inputlist');
+      $(this).next('span').show();
+    }
+  });
   $('.last').live('click keyup',function(e) {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');
