@@ -43,7 +43,13 @@ $(function() {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');
       $(this).next('span').show();
+<<<<<<< HEAD
       $('#hidden_button').click();
+=======
+      console.log($(this).parent().parent().parent().find('.hidden_button'));
+      $(this).parent().parent().parent().find('.hidden_button').click();
+      //$('.hidden_button').click();
+>>>>>>> c3645e09d0b357f7596f286f5ce1c39f4a69e92e
     }
   });
 });

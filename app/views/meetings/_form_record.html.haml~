@@ -34,7 +34,8 @@ $(function() {
   $('.last').live('click keyup',function(e) {
     if ($(this).val() != "") {
       $(this).attr('class','inputlist');
-      $('#hidden_button').click();
+      $(this).next('span').show();
+      $('.hidden_button').click();
     }
   });
 });
