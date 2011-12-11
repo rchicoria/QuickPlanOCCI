@@ -112,13 +112,13 @@ class MeetingsController < ApplicationController
       @meeting.date = nil
     end
     @meeting.state = 'A'
-    @meeting.topics.each do |topic|
-      if topic.name == nil or topic.name.size == 0
-        @meeting.topics.delete(topic)
-      end
-    end
     respond_to do |format|
       if @meeting.save
+        @meeting.topics.each do |topic|
+          if topic.name == nil or topic.name.size == 0
+            @meeting.topics.delete(topic)
+          end
+        end
         flash[:notice] = "An email was sent to you with the meeting management. If you want, you can use the following tool to easily invite them:"
         @meeting.management_url = SecureRandom.base64(8).gsub("/","_").gsub(/=+$/,"")+@meeting.id.to_s
         @meeting.participants = []        
