@@ -253,6 +253,34 @@ ul#tabs li.selected {
 	color: #AAA;
 }
 
+.radio-yes{
+	background:url('w_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-yes{
+	background:url('g_tick.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-no{
+	background:url('w_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+.radio-checked-no{
+	background:url('r_delete.png') no-repeat;
+	width:32px;
+	height:32px;
+}
+
+.even{
+	background:white;
+}
+.odd{
+	background:#EEE;
+}
+
 /*bug do datepicker*/
 #ui-datepicker-div {
   display: none;
